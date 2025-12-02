@@ -34,19 +34,22 @@
 }
 
 .pointContainer {
+  $point-radius: 3.5rem;
+
   position: absolute;
-  top: calc(50% - 28px);
-  left: calc(50% - 28px);
-  // margin: -28px 0 0 -28px;
-  // transform: translate(-50%, -50%);
+  top: calc(50% - $point-radius / 2);
+  left: calc(50% - $point-radius / 2);
+  width: $point-radius;
+  height: $point-radius;
+  cursor: pointer;
 }
 
 .point {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 100%;
+  height: 100%;
   font-size: 1.25rem;
   color: #42567A;
   border: 1px solid rgba(66, 86, 122, 0.5);

@@ -47,7 +47,12 @@ export const Dates: React.FC = () => {
               className={styles.pointContainer}
             >
               <div className={styles.point}>
-                <div className={styles.pointContent}>
+                <div
+                  className={styles.pointContent}
+                  style={{
+                    transform: `rotate(${index * -POINT_ANGLE}deg)`,
+                  }}
+                >
                   <span className={styles.pointIndex}>{++index}</span>
                 </div>
               </div>
