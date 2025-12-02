@@ -57,6 +57,27 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
+  .pointContent {
+    position: relative;
+  }
+
+  .pointName {
+    position: absolute;
+    left: calc($point-radius / 2);
+    margin-left: 1.5rem;
+    font-weight: bold;
+    color: transparent;
+    transition: color 0.6s linear;
+    transition-delay: 1s;
+    pointer-events: none;
+  }
+
+  &.target {
+    .pointName {
+      color: #42567a;
+    }
+  }
+
   &.target,
   &:hover {
     .point {

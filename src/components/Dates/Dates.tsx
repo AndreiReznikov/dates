@@ -6,26 +6,32 @@ import { useGSAP } from "@gsap/react";
 const POINTS = [
   {
     id: 1,
+    name: "Наука",
     events: [],
   },
   {
     id: 2,
+    name: "Кино",
     events: [],
   },
   {
     id: 3,
+    name: "Литература",
     events: [],
   },
   {
     id: 4,
+    name: "Театр",
     events: [],
   },
   {
     id: 5,
+    name: "Спорт",
     events: [],
   },
   {
     id: 6,
+    name: "Интернет",
     events: [],
   },
 ];
@@ -45,26 +51,45 @@ const getShortestRotation = (angle: number): number => {
 
 export const Dates: React.FC = () => {
   const [targetPoint, setTargetPoint] = useState<number>(0);
+  
+  const fullRotationRef = useRef<number>(SHIFT_ANGLE);
   const circleRef = useRef<HTMLDivElement>(null);
+  const pointRefs = useRef<HTMLDivElement[]>([]);
 
   useGSAP(() => {
-    if (circleRef.current) {
-      gsap.set(circleRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
-    }
+    pointRefs.current.forEach((pointRef, index) => {
+      const pointAngle = index * POINT_ANGLE;
+      gsap.set(pointRef, {
+        rotate: -pointAngle - SHIFT_ANGLE,
+      });
+    });
+
+    gsap.set(circleRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
   }, []);
 
   const handlePoint = (index: number) => {
-    const rotation = Number(gsap.getProperty(circleRef.current, "rotation"));
-    const currentTargetAngle = SHIFT_ANGLE - index * POINT_ANGLE - rotation;
-
-    setTargetPoint(index);
+    const currentTargetAngle =
+      SHIFT_ANGLE - index * POINT_ANGLE - fullRotationRef.current;
 
     const shortestRotation = getShortestRotation(currentTargetAngle);
 
     gsap.to(circleRef.current, {
       rotation: `+=${shortestRotation}`,
       duration: 1,
+      onUpdate: () => {
+        pointRefs.current.forEach((pointRef, index) => {
+          fullRotationRef.current = Number(
+            gsap.getProperty(circleRef.current, "rotation")
+          );
+          gsap.set(pointRef, {
+            rotate: -(index * POINT_ANGLE) - fullRotationRef.current,
+            duration: 0,
+          });
+        });
+      },
     });
+
+    setTargetPoint(index);
   };
 
   return (
@@ -92,8 +117,14 @@ export const Dates: React.FC = () => {
               //   }deg)`,
               // }}
             >
-              <div className={styles.pointContent}>
+              <div
+                ref={(el) => {
+                  if (el) pointRefs.current[index] = el;
+                }}
+                className={styles.pointContent}
+              >
                 <span className={styles.pointIndex}>{index + 1}</span>
+                <span className={styles.pointName}>{point?.name ?? ""}</span>
               </div>
             </div>
           </div>
