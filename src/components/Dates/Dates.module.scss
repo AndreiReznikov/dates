@@ -32,3 +32,23 @@
   border: 1px solid rgba(66, 86, 122, 0.2);
   border-radius: 50%;
 }
+
+.pointContainer {
+  position: absolute;
+  top: calc(50% - 28px);
+  left: calc(50% - 28px);
+  // margin: -28px 0 0 -28px;
+  // transform: translate(-50%, -50%);
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  font-size: 1.25rem;
+  color: #42567A;
+  border: 1px solid rgba(66, 86, 122, 0.5);
+  border-radius: 50%;
+}
