@@ -39,32 +39,39 @@ export const Dates: React.FC = () => {
   const circleRef = useRef(null);
 
   useGSAP(() => {
-    gsap.to(circleRef.current, { rotation: -DEFAULT_ANGLE, duration: 0 });
-  });
+    if (circleRef.current) {
+      gsap.set(circleRef.current, { rotation: -DEFAULT_ANGLE, duration: 0 });
+    }
+  }, []);
 
   return (
-    <section className={styles.wrapper}>
-      <div className={styles.container}>
-        <div className={styles.verticalLine}></div>
-        <div className={styles.horizontalLine}></div>
-        <div ref={circleRef} className={styles.circle}>
-          {POINTS.map((point, index) => (
-            <div
-              style={{
-                transform: `rotate(${index * POINT_ANGLE}deg)
+    <div className={styles.container}>
+      <div className={styles.verticalLine}></div>
+      <div className={styles.horizontalLine}></div>
+      <div ref={circleRef} className={styles.circle}>
+        {POINTS.map((point, index) => (
+          <div
+            style={{
+              transform: `rotate(${index * POINT_ANGLE}deg)
                 translate(${CIRCLE_DIAMETER / 2}px)`,
+            }}
+            className={styles.pointContainer}
+          >
+            <div
+              className={styles.point}
+              style={{
+                transform: `rotate(${
+                  -(index * POINT_ANGLE) + DEFAULT_ANGLE
+                }deg)`,
               }}
-              className={styles.pointContainer}
             >
-              <div className={styles.point}>
-                <div className={styles.pointContent}>
-                  <span className={styles.pointIndex}>{++index}</span>
-                </div>
+              <div className={styles.pointContent}>
+                <span className={styles.pointIndex}>{++index}</span>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
