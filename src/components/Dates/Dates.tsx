@@ -36,7 +36,11 @@ const POINT_ANGLE = CIRCLE_ANGLE / POINTS.length;
 const SHIFT_ANGLE = -60;
 
 const getShortestRotation = (angle: number): number => {
-  return ((((angle + 180) % 360) + 360) % 360) - 180;
+  let normalized = angle % 360;
+  if (normalized > 180) normalized -= 360;
+  if (normalized <= -180) normalized += 360;
+
+  return normalized;
 };
 
 export const Dates: React.FC = () => {
