@@ -33,7 +33,11 @@ const POINTS = [
 const CIRCLE_ANGLE = 360;
 const CIRCLE_DIAMETER = 530;
 const POINT_ANGLE = CIRCLE_ANGLE / POINTS.length;
-const SHIFT_ANGLE = 60;
+const SHIFT_ANGLE = -60;
+
+const getShortestRotation = (angle: number): number => {
+  return ((((angle + 180) % 360) + 360) % 360) - 180;
+};
 
 export const Dates: React.FC = () => {
   const [targetPoint, setTargetPoint] = useState<number>(0);
@@ -41,13 +45,22 @@ export const Dates: React.FC = () => {
 
   useGSAP(() => {
     if (circleRef.current) {
-      gsap.set(circleRef.current, { rotation: -SHIFT_ANGLE, duration: 0 });
+      gsap.set(circleRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
     }
   }, []);
 
   const handlePoint = (index: number) => {
-    console.log(index);
+    const rotation = Number(gsap.getProperty(circleRef.current, "rotation"));
+    const currentTargetAngle = SHIFT_ANGLE - index * POINT_ANGLE - rotation;
+
     setTargetPoint(index);
+
+    const shortestRotation = getShortestRotation(currentTargetAngle);
+
+    gsap.to(circleRef.current, {
+      rotation: `+=${shortestRotation}`,
+      duration: 1,
+    });
   };
 
   return (
