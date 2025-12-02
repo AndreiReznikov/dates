@@ -1,5 +1,11 @@
+import { Dates } from "./components/Dates";
+
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <Dates />
+    </div>
+  );
 }
 
 export default App;
