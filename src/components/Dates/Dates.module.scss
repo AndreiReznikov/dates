@@ -42,6 +42,12 @@
   width: $point-radius;
   height: $point-radius;
   cursor: pointer;
+
+  &:hover {
+    .point {
+      transform: scale(1);
+    }
+  }
 }
 
 .point {
@@ -51,7 +57,9 @@
   width: 100%;
   height: 100%;
   font-size: 1.25rem;
-  color: #42567A;
+  color: #42567a;
   border: 1px solid rgba(66, 86, 122, 0.5);
   border-radius: 50%;
+  transform: scale(0.1);
+  transition: transform 0.3s ease;
 }
