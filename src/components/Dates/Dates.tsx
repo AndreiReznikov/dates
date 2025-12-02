@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import styles from "./Dates.module.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 
 const POINTS = [
@@ -33,16 +33,22 @@ const POINTS = [
 const CIRCLE_ANGLE = 360;
 const CIRCLE_DIAMETER = 530;
 const POINT_ANGLE = CIRCLE_ANGLE / POINTS.length;
-const DEFAULT_ANGLE = 60;
+const SHIFT_ANGLE = 60;
 
 export const Dates: React.FC = () => {
-  const circleRef = useRef(null);
+  const [targetPoint, setTargetPoint] = useState<number>(0);
+  const circleRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (circleRef.current) {
-      gsap.set(circleRef.current, { rotation: -DEFAULT_ANGLE, duration: 0 });
+      gsap.set(circleRef.current, { rotation: -SHIFT_ANGLE, duration: 0 });
     }
   }, []);
+
+  const handlePoint = (index: number) => {
+    console.log(index);
+    setTargetPoint(index);
+  };
 
   return (
     <div className={styles.container}>
@@ -51,11 +57,15 @@ export const Dates: React.FC = () => {
       <div ref={circleRef} className={styles.circle}>
         {POINTS.map((point, index) => (
           <div
+            key={point.id}
             style={{
               transform: `rotate(${index * POINT_ANGLE}deg)
                 translate(${CIRCLE_DIAMETER / 2}px)`,
             }}
-            className={styles.pointContainer}
+            className={`${styles.pointContainer} ${
+              targetPoint === index ? styles.target : ""
+            }`}
+            onClick={() => handlePoint(index)}
           >
             <div
               className={styles.point}
@@ -66,7 +76,7 @@ export const Dates: React.FC = () => {
               // }}
             >
               <div className={styles.pointContent}>
-                <span className={styles.pointIndex}>{++index}</span>
+                <span className={styles.pointIndex}>{index + 1}</span>
               </div>
             </div>
           </div>
