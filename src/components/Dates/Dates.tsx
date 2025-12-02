@@ -1,4 +1,7 @@
+import { gsap } from "gsap";
 import styles from "./Dates.module.scss";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 
 const POINTS = [
   {
@@ -30,14 +33,21 @@ const POINTS = [
 const CIRCLE_ANGLE = 360;
 const CIRCLE_DIAMETER = 530;
 const POINT_ANGLE = CIRCLE_ANGLE / POINTS.length;
+const DEFAULT_ANGLE = 60;
 
 export const Dates: React.FC = () => {
+  const circleRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.to(circleRef.current, { rotation: -DEFAULT_ANGLE, duration: 0 });
+  });
+
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
         <div className={styles.verticalLine}></div>
         <div className={styles.horizontalLine}></div>
-        <div className={styles.circle}>
+        <div ref={circleRef} className={styles.circle}>
           {POINTS.map((point, index) => (
             <div
               style={{
@@ -47,12 +57,7 @@ export const Dates: React.FC = () => {
               className={styles.pointContainer}
             >
               <div className={styles.point}>
-                <div
-                  className={styles.pointContent}
-                  style={{
-                    transform: `rotate(${index * -POINT_ANGLE}deg)`,
-                  }}
-                >
+                <div className={styles.pointContent}>
                   <span className={styles.pointIndex}>{++index}</span>
                 </div>
               </div>
