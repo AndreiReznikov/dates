@@ -301,7 +301,7 @@ export const Dates: React.FC = () => {
                 className={styles.pointContent}
               >
                 <span className={styles.pointIndex}>{index + 1}</span>
-                <span className={styles.pointName}>{point?.name ?? ""}</span>
+                <h2 className={styles.pointName}>{point?.name ?? ""}</h2>
               </div>
             </div>
           </div>
@@ -326,19 +326,25 @@ export const Dates: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className={styles.swiperContainer}>
-        <Swiper {...SWIPER_CONFIG}>
-          {POINTS[targetPoint].events.map((event) => (
-            <SwiperSlide key={event.id}>
-              <div className={styles.slideContent}>
-                <h3>{event.year}</h3>
-                <p>{event.text}</p>
-              </div>
-            </SwiperSlide>
-          ))}
-          <button data-swiper-button="prev">{"<"}</button>
-          <button data-swiper-button="next">{">"}</button>
-        </Swiper>
+      <div className={styles.swiperWrapper}>
+        <button className={styles.swiperPrev} data-swiper-button="prev">
+          {"<"}
+        </button>
+        <div className={styles.swiperContainer}>
+          <Swiper {...SWIPER_CONFIG}>
+            {POINTS[targetPoint].events.map((event) => (
+              <SwiperSlide key={event.id}>
+                <div className={styles.slideContent}>
+                  <h3>{event.year}</h3>
+                  <p>{event.text}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <button className={styles.swiperNext} data-swiper-button="next">
+          {">"}
+        </button>
       </div>
     </div>
   );
