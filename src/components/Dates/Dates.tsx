@@ -11,6 +11,10 @@ import styles from "./Dates.module.scss";
 const SWIPER_CONFIG = {
   spaceBetween: 25,
   slidesPerView: 2,
+  navigation: {
+    nextEl: '[data-swiper-button="next"]',
+    prevEl: '[data-swiper-button="prev"]',
+  },
   breakpoints: {
     1024: {
       slidesPerView: 3,
@@ -332,8 +336,8 @@ export const Dates: React.FC = () => {
               </div>
             </SwiperSlide>
           ))}
-          {/* <button onClick={() => swiper.slidePrev()}>{"<"}</button>
-          <button onClick={() => swiper.slideNext()}>{">"}</button> */}
+          <button data-swiper-button="prev">{"<"}</button>
+          <button data-swiper-button="next">{">"}</button>
         </Swiper>
       </div>
     </div>
