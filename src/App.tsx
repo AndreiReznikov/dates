@@ -1,9 +1,10 @@
 import { Dates } from "./components/Dates";
+import { POINTS } from "./mock";
 
 function App() {
   return (
     <>
-      <Dates />
+      <Dates points={POINTS} />
     </>
   );
 }
