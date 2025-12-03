@@ -1,7 +1,24 @@
 import { gsap } from "gsap";
-import styles from "./Dates.module.scss";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css";
+import styles from "./Dates.module.scss";
+
+const SWIPER_CONFIG = {
+  spaceBetween: 25,
+  slidesPerView: 2,
+  breakpoints: {
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 80,
+    },
+  },
+  modules: [Navigation, Pagination],
+};
 
 const POINTS = [
   {
@@ -304,6 +321,20 @@ export const Dates: React.FC = () => {
             {">"}
           </button>
         </div>
+      </div>
+      <div className={styles.swiperContainer}>
+        <Swiper {...SWIPER_CONFIG}>
+          {POINTS[targetPoint].events.map((event) => (
+            <SwiperSlide key={event.id}>
+              <div className={styles.slideContent}>
+                <h3>{event.year}</h3>
+                <p>{event.text}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+          {/* <button onClick={() => swiper.slidePrev()}>{"<"}</button>
+          <button onClick={() => swiper.slideNext()}>{">"}</button> */}
+        </Swiper>
       </div>
     </div>
   );
