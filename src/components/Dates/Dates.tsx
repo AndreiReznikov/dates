@@ -36,9 +36,9 @@ const POINTS = [
   },
 ];
 
-const CIRCLE_ANGLE = 360;
-const CIRCLE_DIAMETER = 530;
-const POINT_ANGLE = CIRCLE_ANGLE / POINTS.length;
+const WHEEL_ANGLE = 360;
+const WHEEL_DIAMETER = 530;
+const POINT_ANGLE = WHEEL_ANGLE / POINTS.length;
 const SHIFT_ANGLE = -60;
 
 const getShortestRotation = (angle: number): number => {
@@ -51,9 +51,9 @@ const getShortestRotation = (angle: number): number => {
 
 export const Dates: React.FC = () => {
   const [targetPoint, setTargetPoint] = useState<number>(0);
-  
+
   const fullRotationRef = useRef<number>(SHIFT_ANGLE);
-  const circleRef = useRef<HTMLDivElement>(null);
+  const wheelRef = useRef<HTMLDivElement>(null);
   const pointRefs = useRef<HTMLDivElement[]>([]);
 
   useGSAP(() => {
@@ -64,7 +64,7 @@ export const Dates: React.FC = () => {
       });
     });
 
-    gsap.set(circleRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
+    gsap.set(wheelRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
   }, []);
 
   const handlePoint = (index: number) => {
@@ -73,14 +73,14 @@ export const Dates: React.FC = () => {
 
     const shortestRotation = getShortestRotation(currentTargetAngle);
 
-    gsap.to(circleRef.current, {
+    gsap.to(wheelRef.current, {
       rotation: `+=${shortestRotation}`,
       duration: 1,
       onUpdate: () => {
+        fullRotationRef.current = Number(
+          gsap.getProperty(wheelRef.current, "rotation")
+        );
         pointRefs.current.forEach((pointRef, index) => {
-          fullRotationRef.current = Number(
-            gsap.getProperty(circleRef.current, "rotation")
-          );
           gsap.set(pointRef, {
             rotate: -(index * POINT_ANGLE) - fullRotationRef.current,
             duration: 0,
@@ -96,13 +96,13 @@ export const Dates: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.verticalLine}></div>
       <div className={styles.horizontalLine}></div>
-      <div ref={circleRef} className={styles.circle}>
+      <div ref={wheelRef} className={styles.wheel}>
         {POINTS.map((point, index) => (
           <div
             key={point.id}
             style={{
               transform: `rotate(${index * POINT_ANGLE}deg)
-                translate(${CIRCLE_DIAMETER / 2}px)`,
+                translate(${WHEEL_DIAMETER / 2}px)`,
             }}
             className={`${styles.pointContainer} ${
               targetPoint === index ? styles.target : ""
