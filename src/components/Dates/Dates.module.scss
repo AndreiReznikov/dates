@@ -10,10 +10,10 @@
 .verticalLine {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
   width: 1px;
   height: 100%;
   background-color: rgba(66, 86, 122, 0.1);
+  transform: translateX(-50%);
 }
 
 .horizontalLine {
@@ -22,6 +22,27 @@
   width: 100%;
   height: 1px;
   background-color: rgba(66, 86, 122, 0.1);
+}
+
+.years {
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  display: flex;
+  gap: 7rem;
+  font-size: 12.5rem;
+  font-weight: bold;
+  line-height: 10rem;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+.initYear {
+  color: #5d5fef;
+}
+
+.lastYear {
+  color: #ef5da8;
 }
 
 .wheel {
@@ -92,6 +113,14 @@
       border: 1px solid rgba(66, 86, 122, 0.5);
     }
   }
+}
+
+.wheelControl {
+  position: absolute;
+  top: 697px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 .swiperWrapper {

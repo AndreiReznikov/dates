@@ -39,6 +39,13 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
   const fullRotationRef = useRef<number>(SHIFT_ANGLE);
   const wheelRef = useRef<HTMLDivElement>(null);
   const pointRefs = useRef<HTMLDivElement[]>([]);
+  const initYearRef = useRef<HTMLSpanElement>(null);
+  const lastYearRef = useRef<HTMLSpanElement>(null);
+
+  const yearValues = useRef({
+    initYear: points[0].initYear,
+    lastYear: points[0].lastYear,
+  });
 
   const POINT_ANGLE = WHEEL_ANGLE / points?.length;
 
@@ -53,11 +60,37 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
     gsap.set(wheelRef.current, { rotation: SHIFT_ANGLE, duration: 0 });
   }, []);
 
+  const animateYears = (index: number) => {
+    const targetInitYear = points[index].initYear;
+    const targetLastYear = points[index].lastYear;
+
+    gsap.to(yearValues.current, {
+      duration: 1,
+      initYear: targetInitYear,
+      lastYear: targetLastYear,
+      roundProps: "initYear,lastYear",
+      onUpdate: () => {
+        if (initYearRef.current) {
+          initYearRef.current.textContent = Math.round(
+            yearValues.current.initYear
+          ).toString();
+        }
+        if (lastYearRef.current) {
+          lastYearRef.current.textContent = Math.round(
+            yearValues.current.lastYear
+          ).toString();
+        }
+      },
+    });
+  };
+
   const handlePoint = (index: number) => {
     const currentTargetAngle =
       SHIFT_ANGLE - index * POINT_ANGLE - fullRotationRef.current;
 
     const shortestRotation = getShortestRotation(currentTargetAngle);
+
+    animateYears(index);
 
     gsap.to(wheelRef.current, {
       rotation: `+=${shortestRotation}`,
@@ -86,6 +119,14 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
     <div className={styles.container}>
       <div className={styles.verticalLine}></div>
       <div className={styles.horizontalLine}></div>
+      <div className={styles.years}>
+        <span className={styles.initYear} ref={initYearRef}>
+          {points[targetPoint].initYear}
+        </span>
+        <span className={styles.lastYear} ref={lastYearRef}>
+          {points[targetPoint].lastYear}
+        </span>
+      </div>
       <div ref={wheelRef} className={styles.wheel}>
         {points?.map((point, index) => (
           <div
