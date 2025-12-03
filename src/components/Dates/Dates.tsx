@@ -119,6 +119,14 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
     <div className={styles.container}>
       <div className={styles.verticalLine}></div>
       <div className={styles.horizontalLine}></div>
+      <div className={styles.titleContainer}>
+        <div className={styles.titleDesignLine}></div>
+        <h1 className={styles.title}>
+          Исторические
+          <br />
+          даты
+        </h1>
+      </div>
       <div className={styles.years}>
         <span className={styles.initYear} ref={initYearRef}>
           {points[targetPoint].initYear}
