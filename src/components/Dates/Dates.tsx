@@ -41,6 +41,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
   const pointRefs = useRef<HTMLDivElement[]>([]);
   const initYearRef = useRef<HTMLSpanElement>(null);
   const lastYearRef = useRef<HTMLSpanElement>(null);
+  const swiperWrapperRef = useRef<HTMLDivElement>(null);
 
   const yearValues = useRef({
     initYear: points[0].initYear,
@@ -85,6 +86,8 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
   };
 
   const handlePoint = (index: number) => {
+    swiperWrapperRef?.current?.classList.add(styles.swiperHidden);
+
     const currentTargetAngle =
       SHIFT_ANGLE - index * POINT_ANGLE - fullRotationRef.current;
 
@@ -105,6 +108,9 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
             duration: 0,
           });
         });
+      },
+      onComplete: () => {
+        swiperWrapperRef?.current?.classList.remove(styles.swiperHidden);
       },
     });
 
@@ -179,7 +185,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
           ></button>
         </div>
       </div>
-      <div className={styles.swiperWrapper}>
+      <div ref={swiperWrapperRef} className={styles.swiperWrapper}>
         <button
           className={styles.swiperPrev}
           data-swiper-button={`prev-${swiperId}`}

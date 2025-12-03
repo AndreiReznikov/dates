@@ -166,8 +166,8 @@
   &::after {
     content: "";
     display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     color: #42567a;
@@ -185,7 +185,12 @@
 }
 
 .wheelPrev::after {
+  margin-left: 4px;
   transform: rotate(135deg);
+}
+
+.wheelNext::after {
+  margin-right: 4px;
 }
 
 .swiperWrapper {
@@ -196,12 +201,19 @@
   align-items: center;
   width: 100%;
   padding: 0 2.5rem;
+  transition: opacity 0.4s ease;
+}
+
+.swiperHidden {
+  opacity: 0;
+  transition: opacity 0s;
 }
 
 .swiperContainer {
-  max-width: 1200px;
+  max-width: 1280px;
   width: 100%;
   padding: 0 1rem;
+  user-select: none;
 
   :global(.swiper) {
     cursor: pointer;
