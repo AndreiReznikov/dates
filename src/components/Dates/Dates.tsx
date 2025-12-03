@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -11,10 +11,6 @@ import styles from "./Dates.module.scss";
 const SWIPER_CONFIG = {
   spaceBetween: 25,
   slidesPerView: 2,
-  navigation: {
-    nextEl: '[data-swiper-button="next"]',
-    prevEl: '[data-swiper-button="prev"]',
-  },
   breakpoints: {
     1024: {
       slidesPerView: 3,
@@ -235,6 +231,7 @@ const getShortestRotation = (angle: number): number => {
 
 export const Dates: React.FC = () => {
   const [targetPoint, setTargetPoint] = useState<number>(0);
+  const swiperId = useId();
 
   const fullRotationRef = useRef<number>(SHIFT_ANGLE);
   const wheelRef = useRef<HTMLDivElement>(null);
@@ -327,11 +324,21 @@ export const Dates: React.FC = () => {
         </div>
       </div>
       <div className={styles.swiperWrapper}>
-        <button className={styles.swiperPrev} data-swiper-button="prev">
+        <button
+          className={styles.swiperPrev}
+          data-swiper-button={`prev-${swiperId}`}
+        >
           {"<"}
         </button>
         <div className={styles.swiperContainer}>
-          <Swiper {...SWIPER_CONFIG}>
+          <Swiper
+            key={targetPoint}
+            navigation={{
+              nextEl: `[data-swiper-button="next-${swiperId}"]`,
+              prevEl: `[data-swiper-button="prev-${swiperId}"]`,
+            }}
+            {...SWIPER_CONFIG}
+          >
             {POINTS[targetPoint].events.map((event) => (
               <SwiperSlide key={event.id}>
                 <div className={styles.slideContent}>
@@ -342,7 +349,10 @@ export const Dates: React.FC = () => {
             ))}
           </Swiper>
         </div>
-        <button className={styles.swiperNext} data-swiper-button="next">
+        <button
+          className={styles.swiperNext}
+          data-swiper-button={`next-${swiperId}`}
+        >
           {">"}
         </button>
       </div>
