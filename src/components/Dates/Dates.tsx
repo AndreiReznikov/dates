@@ -109,14 +109,7 @@ export const Dates: React.FC = () => {
             }`}
             onClick={() => handlePoint(index)}
           >
-            <div
-              className={styles.point}
-              // style={{
-              //   transform: `rotate(${
-              //     -(index * POINT_ANGLE) + DEFAULT_ANGLE
-              //   }deg)`,
-              // }}
-            >
+            <div className={styles.point}>
               <div
                 ref={(el) => {
                   if (el) pointRefs.current[index] = el;
@@ -129,6 +122,25 @@ export const Dates: React.FC = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className={styles.wheelControl}>
+        <div className={styles.targetPointIndex}>
+          0{targetPoint + 1}/0{POINTS.length}
+        </div>
+        <div className={styles.wheelButtons}>
+          <button
+            onClick={() => handlePoint(targetPoint - 1)}
+            disabled={targetPoint === 0}
+          >
+            {"<"}
+          </button>
+          <button
+            onClick={() => handlePoint(targetPoint + 1)}
+            disabled={targetPoint === POINTS.length - 1}
+          >
+            {">"}
+          </button>
+        </div>
       </div>
     </div>
   );
