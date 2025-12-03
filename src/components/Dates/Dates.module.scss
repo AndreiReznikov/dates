@@ -130,7 +130,7 @@
   &:hover {
     .point {
       transform: scale(1);
-      background-color: transparent;
+      background-color: #f4f5f9;
       border: 1px solid rgba(66, 86, 122, 0.5);
     }
   }
@@ -142,6 +142,50 @@
   left: 80px;
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wheelButtons {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.wheelPrev,
+.wheelNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(66, 86, 122, 0.5);
+  background-color: #f4f5f9;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    color: #42567a;
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    background-color: white;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.wheelPrev::after {
+  transform: rotate(135deg);
 }
 
 .swiperWrapper {
@@ -156,14 +200,32 @@
 
 .swiperContainer {
   max-width: 1200px;
+  width: 100%;
+  padding: 0 1rem;
 
   :global(.swiper) {
     cursor: pointer;
   }
 }
 
+.slideTitle {
+  margin-bottom: 0.9375rem;
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1.5625rem;
+  font-weight: normal;
+  color: #3877ee;
+}
+
+.slideText {
+  font-size: 1.25rem;
+}
+
 .swiperPrev,
 .swiperNext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   background-color: #fff;
@@ -174,6 +236,17 @@
   z-index: 100;
   cursor: pointer;
 
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    color: #3877ee;
+    transform: rotate(-45deg);
+  }
+
   &:hover {
     background-color: #e0e0e0;
   }
@@ -182,4 +255,8 @@
     opacity: 0;
     pointer-events: none;
   }
+}
+
+.swiperPrev::after {
+  transform: rotate(135deg);
 }

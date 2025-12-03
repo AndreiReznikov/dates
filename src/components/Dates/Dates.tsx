@@ -168,26 +168,22 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
         </div>
         <div className={styles.wheelButtons}>
           <button
+            className={styles.wheelPrev}
             onClick={() => handlePoint(targetPoint - 1)}
             disabled={targetPoint === 0}
-          >
-            {"<"}
-          </button>
+          ></button>
           <button
+            className={styles.wheelNext}
             onClick={() => handlePoint(targetPoint + 1)}
             disabled={targetPoint === points?.length - 1}
-          >
-            {">"}
-          </button>
+          ></button>
         </div>
       </div>
       <div className={styles.swiperWrapper}>
         <button
           className={styles.swiperPrev}
           data-swiper-button={`prev-${swiperId}`}
-        >
-          {"<"}
-        </button>
+        ></button>
         <div className={styles.swiperContainer}>
           <Swiper
             key={targetPoint}
@@ -200,8 +196,8 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
             {points[targetPoint].events.map((event) => (
               <SwiperSlide key={event.id}>
                 <div className={styles.slideContent}>
-                  <h3>{event.year}</h3>
-                  <p>{event.text}</p>
+                  <h3 className={styles.slideTitle}>{event.year}</h3>
+                  <p className={styles.slideText}>{event.text}</p>
                 </div>
               </SwiperSlide>
             ))}
@@ -210,9 +206,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
         <button
           className={styles.swiperNext}
           data-swiper-button={`next-${swiperId}`}
-        >
-          {">"}
-        </button>
+        ></button>
       </div>
     </div>
   );
