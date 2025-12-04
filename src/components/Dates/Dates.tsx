@@ -14,8 +14,12 @@ import styles from "./Dates.module.scss";
 
 const SWIPER_CONFIG = {
   spaceBetween: 25,
-  slidesPerView: 2,
+  slidesPerView: 1.5,
   breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 60,
+    },
     1024: {
       slidesPerView: 3,
       spaceBetween: 80,

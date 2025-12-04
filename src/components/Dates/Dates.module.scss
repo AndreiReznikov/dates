@@ -5,6 +5,16 @@
   margin: 0 auto;
   border-left: 1px solid rgba(66, 86, 122, 0.1);
   border-right: 1px solid rgba(66, 86, 122, 0.1);
+
+  @media (max-width: 1024px) {
+    margin: 0 20px;
+    border: none;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 568px;
+    height: 100vh;
+  }
 }
 
 .verticalLine {
@@ -14,6 +24,10 @@
   height: 100%;
   background-color: rgba(66, 86, 122, 0.1);
   transform: translateX(-50%);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .horizontalLine {
@@ -22,6 +36,10 @@
   width: 100%;
   height: 1px;
   background-color: rgba(66, 86, 122, 0.1);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .titleContainer {
@@ -31,18 +49,34 @@
   display: flex;
   align-items: center;
   gap: 4.875rem;
+
+  @media (max-width: 768px) {
+    top: 59px;
+  }
 }
 
 .title {
   margin: 0;
   padding: 0;
   font-size: 3.5rem;
+
+  @media (max-width: 1024px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 
 .titleDesignLine {
   width: 5px;
   height: 7.5rem;
   background-image: linear-gradient(to bottom, #5d5fef, #ef5da8);
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .years {
@@ -56,10 +90,24 @@
   line-height: 10rem;
   transform: translateX(-50%);
   user-select: none;
+
+  @media (max-width: 1024px) {
+    font-size: 8rem;
+  }
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+    top: 163px;
+    font-size: 3.5rem;
+  }
 }
 
 .initYear {
   color: #5d5fef;
+
+  @media (max-width: 768px) {
+    color: #3877ee;
+  }
 }
 
 .lastYear {
@@ -75,6 +123,10 @@
   border: 1px solid rgba(66, 86, 122, 0.2);
   border-radius: 50%;
   transform: translateX(-50%);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .pointContainer {
@@ -142,12 +194,27 @@
   left: 80px;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    top: unset;
+    left: 0;
+    bottom: 20px;
+  }
+}
+
+.targetPointIndex {
+  font-size: 0.875rem;
 }
 
 .wheelButtons {
   display: flex;
-  gap: 1.25rem;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
 }
 
 .wheelPrev,
@@ -182,6 +249,16 @@
     opacity: 0.5;
     pointer-events: none;
   }
+
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+
+    &::after {
+      width: 6px;
+      height: 6px;
+    }
+  }
 }
 
 .wheelPrev::after {
@@ -202,6 +279,11 @@
   width: 100%;
   padding: 0 2.5rem;
   transition: opacity 0.4s ease;
+
+  @media (max-width: 768px) {
+    top: 22rem;
+    padding: 0;
+  }
 }
 
 .swiperHidden {
@@ -218,18 +300,33 @@
   :global(.swiper) {
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.25rem 0;
+    border-top: 1px solid #c7cdd9;
+  }
 }
 
 .slideTitle {
+  margin: 0;
   margin-bottom: 0.9375rem;
   font-family: "Bebas Neue", Arial, sans-serif;
   font-size: 1.5625rem;
   font-weight: normal;
   color: #3877ee;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 }
 
 .slideText {
   font-size: 1.25rem;
+  line-height: 1.875rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
 }
 
 .swiperPrev,
@@ -266,6 +363,10 @@
   &:global(.swiper-button-disabled) {
     opacity: 0;
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 
