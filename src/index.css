@@ -1,3 +1,20 @@
+:root {
+  --text-color: #42567a;
+  --bg-color: #f4f5f9;
+
+  --primary-color: #5d5fef;
+  --secondary-color: #ef5da8;
+  --support-color: #3877ee;
+
+  --outline-10: rgba(66, 86, 122, 0.1);
+  --outline-20: rgba(66, 86, 122, 0.2);
+  --outline-50: rgba(66, 86, 122, 0.5);
+
+  --content-desktop-width: 1440px;
+  --tablet-width: 1024px;
+  --mobile-width: 768px;
+}
+
 *,
 *::before,
 *::after {
@@ -11,6 +28,6 @@ body {
   font-family: "PT Sans", Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #42567a;
-  background-color: #f4f5f9;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }

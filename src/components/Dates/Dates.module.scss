@@ -1,10 +1,11 @@
 .container {
   position: relative;
-  max-width: 1440px;
+  max-width: var(--content-desktop-width);
   min-height: 1080px;
+  height: 100vh;
   margin: 0 auto;
-  border-left: 1px solid rgba(66, 86, 122, 0.1);
-  border-right: 1px solid rgba(66, 86, 122, 0.1);
+  border-left: 1px solid var(--outline-10);
+  border-right: 1px solid var(--outline-10);
 
   @media (max-width: 1024px) {
     margin: 0 20px;
@@ -22,7 +23,7 @@
   left: 50%;
   width: 1px;
   height: 100%;
-  background-color: rgba(66, 86, 122, 0.1);
+  background-color: var(--outline-10);
   transform: translateX(-50%);
 
   @media (max-width: 768px) {
@@ -35,7 +36,7 @@
   top: 480px;
   width: 100%;
   height: 1px;
-  background-color: rgba(66, 86, 122, 0.1);
+  background-color: var(--outline-10);
 
   @media (max-width: 768px) {
     display: none;
@@ -72,7 +73,11 @@
 .titleDesignLine {
   width: 5px;
   height: 7.5rem;
-  background-image: linear-gradient(to bottom, #5d5fef, #ef5da8);
+  background-image: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--secondary-color)
+  );
 
   @media (max-width: 1024px) {
     display: none;
@@ -104,15 +109,15 @@
 }
 
 .initYear {
-  color: #5d5fef;
+  color: var(--primary-color);
 
   @media (max-width: 768px) {
-    color: #3877ee;
+    color: var(--support-color);
   }
 }
 
 .lastYear {
-  color: #ef5da8;
+  color: var(--secondary-color);
 }
 
 .wheel {
@@ -121,7 +126,7 @@
   left: 50%;
   width: 530px;
   height: 530px;
-  border: 1px solid rgba(66, 86, 122, 0.2);
+  border: 1px solid var(--outline-20);
   border-radius: 50%;
   transform: translateX(-50%);
 
@@ -147,8 +152,8 @@
     width: 100%;
     height: 100%;
     font-size: 1.25rem;
-    color: #42567a;
-    background-color: #42567a;
+    color: var(--text-color);
+    background-color: var(--text-color);
     border-radius: 50%;
     transform: scale(0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
@@ -175,7 +180,7 @@
 
   &.target {
     .pointName {
-      color: #42567a;
+      color: var(--text-color);
     }
   }
 
@@ -183,8 +188,8 @@
   &:hover {
     .point {
       transform: scale(1);
-      background-color: #f4f5f9;
-      border: 1px solid rgba(66, 86, 122, 0.5);
+      background-color: var(--bg-color);
+      border: 1px solid var(--outline-50);
     }
   }
 }
@@ -226,8 +231,8 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 1px solid rgba(66, 86, 122, 0.5);
-  background-color: #f4f5f9;
+  border: 1px solid var(--outline-50);
+  background-color: var(--bg-color);
   transition: background-color 0.2s ease;
   cursor: pointer;
 
@@ -238,12 +243,12 @@
     height: 10px;
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
-    color: #42567a;
+    color: var(--text-color);
     transform: rotate(-45deg);
   }
 
   &:hover {
-    background-color: white;
+    background-color: #fff;
   }
 
   &:disabled {
@@ -331,7 +336,7 @@
   font-family: "Bebas Neue", Arial, sans-serif;
   font-size: 1.5625rem;
   font-weight: normal;
-  color: #3877ee;
+  color: var(--support-color);
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -371,12 +376,12 @@
     height: 8px;
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
-    color: #3877ee;
+    color: var(--support-color);
     transform: rotate(-45deg);
   }
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: #f3f3f3;
   }
 
   &:global(.swiper-button-disabled) {
@@ -394,7 +399,7 @@
 }
 
 .pagination {
-  --swiper-pagination-color: #42567A;
+  --swiper-pagination-color: var(--text-color);
   --swiper-pagination-bullet-width: 6px;
   --swiper-pagination-bullet-height: 6px;
   --swiper-pagination-bullet-horizontal-gap: 5px;
