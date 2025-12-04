@@ -392,3 +392,20 @@
 .swiperPrev::after {
   transform: rotate(135deg);
 }
+
+.pagination {
+  --swiper-pagination-color: #42567A;
+  --swiper-pagination-bullet-width: 6px;
+  --swiper-pagination-bullet-height: 6px;
+  --swiper-pagination-bullet-horizontal-gap: 5px;
+
+  display: none;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 32px !important;
+  }
+}

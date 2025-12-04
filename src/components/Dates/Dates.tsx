@@ -205,6 +205,10 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
                 nextEl: `[data-swiper-button="next-${swiperId}"]`,
                 prevEl: `[data-swiper-button="prev-${swiperId}"]`,
               }}
+              pagination={{
+                clickable: true,
+                el: `[data-swiper-pagination="${swiperId}"]`,
+              }}
               {...SWIPER_CONFIG}
             >
               {points[targetPoint].events.map((event) => (
@@ -223,6 +227,10 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
           ></button>
         </div>
       </div>
+      <div
+        className={styles.pagination}
+        data-swiper-pagination={`${swiperId}`}
+      ></div>
     </div>
   );
 };
