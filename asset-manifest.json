@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AndreiReznikov/dates/static/css/main.31807bad.css",
+    "main.js": "/AndreiReznikov/dates/static/js/main.61a25133.js",
+    "index.html": "/AndreiReznikov/dates/index.html",
+    "main.31807bad.css.map": "/AndreiReznikov/dates/static/css/main.31807bad.css.map",
+    "main.61a25133.js.map": "/AndreiReznikov/dates/static/js/main.61a25133.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31807bad.css",
+    "static/js/main.61a25133.js"
+  ]
+}
