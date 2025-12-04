@@ -45,7 +45,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
   const pointRefs = useRef<HTMLDivElement[]>([]);
   const initYearRef = useRef<HTMLSpanElement>(null);
   const lastYearRef = useRef<HTMLSpanElement>(null);
-  const swiperWrapperRef = useRef<HTMLDivElement>(null);
+  const fadingWrapperRef = useRef<HTMLDivElement>(null);
 
   const yearValues = useRef({
     initYear: points[0].initYear,
@@ -90,7 +90,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
   };
 
   const handlePoint = (index: number) => {
-    swiperWrapperRef?.current?.classList.add(styles.swiperHidden);
+    fadingWrapperRef?.current?.classList.add(styles.wrapperHidden);
 
     const currentTargetAngle =
       SHIFT_ANGLE - index * POINT_ANGLE - fullRotationRef.current;
@@ -114,7 +114,7 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
         });
       },
       onComplete: () => {
-        swiperWrapperRef?.current?.classList.remove(styles.swiperHidden);
+        fadingWrapperRef?.current?.classList.remove(styles.wrapperHidden);
       },
     });
 
@@ -189,34 +189,39 @@ export const Dates: React.FC<DatesProps> = ({ points }) => {
           ></button>
         </div>
       </div>
-      <div ref={swiperWrapperRef} className={styles.swiperWrapper}>
-        <button
-          className={styles.swiperPrev}
-          data-swiper-button={`prev-${swiperId}`}
-        ></button>
-        <div className={styles.swiperContainer}>
-          <Swiper
-            key={targetPoint}
-            navigation={{
-              nextEl: `[data-swiper-button="next-${swiperId}"]`,
-              prevEl: `[data-swiper-button="prev-${swiperId}"]`,
-            }}
-            {...SWIPER_CONFIG}
-          >
-            {points[targetPoint].events.map((event) => (
-              <SwiperSlide key={event.id}>
-                <div className={styles.slideContent}>
-                  <h3 className={styles.slideTitle}>{event.year}</h3>
-                  <p className={styles.slideText}>{event.text}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+      <div ref={fadingWrapperRef} className={styles.fadingWrapper}>
+        <h2 className={styles.mobileTitle}>
+          {points?.[targetPoint].name ?? ""}
+        </h2>
+        <div className={styles.swiperWrapper}>
+          <button
+            className={styles.swiperPrev}
+            data-swiper-button={`prev-${swiperId}`}
+          ></button>
+          <div className={styles.swiperContainer}>
+            <Swiper
+              key={targetPoint}
+              navigation={{
+                nextEl: `[data-swiper-button="next-${swiperId}"]`,
+                prevEl: `[data-swiper-button="prev-${swiperId}"]`,
+              }}
+              {...SWIPER_CONFIG}
+            >
+              {points[targetPoint].events.map((event) => (
+                <SwiperSlide key={event.id}>
+                  <div className={styles.slideContent}>
+                    <h3 className={styles.slideTitle}>{event.year}</h3>
+                    <p className={styles.slideText}>{event.text}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          <button
+            className={styles.swiperNext}
+            data-swiper-button={`next-${swiperId}`}
+          ></button>
         </div>
-        <button
-          className={styles.swiperNext}
-          data-swiper-button={`next-${swiperId}`}
-        ></button>
       </div>
     </div>
   );

@@ -99,6 +99,7 @@
     gap: 2rem;
     top: 163px;
     font-size: 3.5rem;
+    line-height: 6rem;
   }
 }
 
@@ -270,25 +271,42 @@
   margin-right: 4px;
 }
 
-.swiperWrapper {
+.fadingWrapper {
   position: absolute;
   top: 841px;
+  width: 100%;
+  transition: opacity 0.4s ease;
+
+  @media (max-width: 768px) {
+    top: 313px;
+  }
+}
+
+.wrapperHidden {
+  opacity: 0;
+  transition: opacity 0s;
+}
+
+.mobileTitle {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline-block;
+    font-size: 1.25rem;
+  }
+}
+
+.swiperWrapper {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0 2.5rem;
-  transition: opacity 0.4s ease;
 
   @media (max-width: 768px) {
-    top: 22rem;
     padding: 0;
   }
-}
-
-.swiperHidden {
-  opacity: 0;
-  transition: opacity 0s;
 }
 
 .swiperContainer {
@@ -326,6 +344,7 @@
 
   @media (max-width: 768px) {
     font-size: 0.875rem;
+    line-height: 1rem;
   }
 }
 
